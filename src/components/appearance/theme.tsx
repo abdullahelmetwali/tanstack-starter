@@ -22,7 +22,7 @@ export function ThemeSwitcher({ variant = "button" }: { variant?: "button" | "se
         <div>
             {
                 variant === "button" && (
-                    <Button variant={"outline"} size={"sm"} onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
+                    <Button variant={"outline"} size={"icon-sm"} onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
                         {theme === "dark" ? <Moon /> : <Sun />}
                     </Button>
                 )
@@ -31,7 +31,7 @@ export function ThemeSwitcher({ variant = "button" }: { variant?: "button" | "se
                 variant === "select" && (
                     <DropdownMenu>
                         <DropdownMenuTrigger>
-                            <Button variant={"outline"} size={"sm"}>
+                            <Button variant={"outline"} size={"icon-sm"}>
                                 <CloudSun />
                             </Button>
                         </DropdownMenuTrigger>
@@ -60,7 +60,7 @@ export function ThemeSwitcher({ variant = "button" }: { variant?: "button" | "se
             }
             {
                 variant === "group" && (
-                    <div className="flex items-center gap-2 border rounded-2xl *:py-1 *:px-2 w-fit">
+                    <div className="flex items-center gap-2 border rounded-2xl *:py-1.5 *:px-2 w-fit">
                         <Tooltip>
                             <TooltipTrigger onClick={() => setTheme("light")}
                                 className={cn(theme === "light" ? "border-e rounded-full" : "border-0")}

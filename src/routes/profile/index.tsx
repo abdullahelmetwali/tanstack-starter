@@ -1,11 +1,14 @@
 import { createFileRoute } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/contact-us/')({
-  component: ContactUs,
+export const Route = createFileRoute('/profile/')({
+  component: Profile,
+  beforeLoad: () => {
+    // your auth action here
+  },
   head: () => ({
     meta: [
       {
-        title: "Contact Us | Tanstack Starter"
+        title: "Profile | Tanstack Starter"
       },
       {
         name: 'description',
@@ -15,10 +18,10 @@ export const Route = createFileRoute('/contact-us/')({
   })
 })
 
-function ContactUs() {
+function Profile() {
   return (
     <main className='min-h-[80dvh] grid place-items-center text-base'>
-      Contact Us
+      Profile
     </main>
   )
 }

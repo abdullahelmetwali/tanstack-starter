@@ -24,7 +24,8 @@ export function LanguageSwitcher({ variant = "button" }: { variant?: "button" | 
             {
                 variant === "button" ?
                     (
-                        <Button onClick={() => toggleLanguage(i18n.language === "en" ? "ar" : "en")}>
+                        <Button variant={"outline"} size={"icon-sm"}
+                            onClick={() => toggleLanguage(i18n.language === "en" ? "ar" : "en")}>
                             <Languages />
                         </Button>
                     )

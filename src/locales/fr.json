@@ -1,3 +1,10 @@
 {
-  "hi": "Bonjour le monde!"
+  "nav": {
+    "about": "À propos",
+    "contact-us": "Contactez-nous",
+    "posts": "Publications",
+    "profile": "Profil",
+    "login": "Connexion",
+    "404": "Page non trouvée"
+  }
 }

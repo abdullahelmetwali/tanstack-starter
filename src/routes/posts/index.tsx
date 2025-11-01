@@ -1,11 +1,12 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { AllPosts } from './-components/all-posts'
 
-export const Route = createFileRoute('/contact-us/')({
-  component: ContactUs,
+export const Route = createFileRoute('/posts/')({
+  component: Posts,
   head: () => ({
     meta: [
       {
-        title: "Contact Us | Tanstack Starter"
+        title: "Posts | Tanstack Starter"
       },
       {
         name: 'description',
@@ -15,10 +16,13 @@ export const Route = createFileRoute('/contact-us/')({
   })
 })
 
-function ContactUs() {
+function Posts() {
   return (
     <main className='min-h-[80dvh] grid place-items-center text-base'>
-      Contact Us
+      <h1>
+        Posts
+      </h1>
+      <AllPosts />
     </main>
   )
 }
