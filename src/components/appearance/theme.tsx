@@ -60,7 +60,7 @@ export function ThemeSwitcher({ variant = "button" }: { variant?: "button" | "se
             }
             {
                 variant === "group" && (
-                    <div className="flex items-center gap-2 border rounded-2xl *:py-1.5 *:px-2 w-fit">
+                    <div className="flex items-center gap-2 border rounded-md *:py-1.5 *:px-2 w-28">
                         <Tooltip>
                             <TooltipTrigger onClick={() => setTheme("light")}
                                 className={cn(theme === "light" ? "border-e rounded-full" : "border-0")}
