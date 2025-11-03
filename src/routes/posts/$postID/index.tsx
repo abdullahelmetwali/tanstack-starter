@@ -19,26 +19,26 @@ export const Route = createFileRoute('/posts/$postID/')({
 
 function PostDetails() {
   const { postID } = Route.useParams();
-  const { data: _data, isLoading, error } = useGet({
+  const { data: _data, isLoading: _isLoading, error: _error } = useGet({
     url: `/posts/${postID}`,
     cacheKey: postID
   });
 
-  if (isLoading) {
-    return (
-      <div className='min-h-[80dvh] grid place-items-center'>
-        <Loader className="animate-spin" />
-      </div>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <div className='min-h-[80dvh] grid place-items-center'>
+  //       <Loader className="animate-spin" />
+  //     </div>
+  //   );
+  // }
 
-  if (error) {
-    return (
-      <div className='min-h-[80dvh] grid place-items-center text-destructive'>
-        Error: {error.message}
-      </div>
-    );
-  }
+  // if (error) {
+  //   return (
+  //     <div className='min-h-[80dvh] grid place-items-center text-destructive'>
+  //       Error: {error.message}
+  //     </div>
+  //   );
+  // }
 
   return (
     <main className='min-h-[80dvh] grid place-items-center text-base'>
