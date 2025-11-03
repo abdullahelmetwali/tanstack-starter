@@ -1,4 +1,4 @@
-export default function NotFound() {
+export function NotFound() {
     document.title = "404 | Error!"
     return (
         <div className="fixed inset-0 z-100 flex items-center justify-center h-dvh w-dvw bg-background text-foreground">

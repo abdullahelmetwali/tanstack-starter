@@ -23,6 +23,10 @@ export function Header() {
 
   const pages = [
     {
+      url: "/components",
+      title: t('nav.components')
+    },
+    {
       url: "/about",
       title: t('nav.about')
     },

@@ -14,6 +14,7 @@ import { Route as ProfileIndexRouteImport } from './routes/profile/index'
 import { Route as PostsIndexRouteImport } from './routes/posts/index'
 import { Route as LoginIndexRouteImport } from './routes/login/index'
 import { Route as ContactUsIndexRouteImport } from './routes/contact-us/index'
+import { Route as ComponentsIndexRouteImport } from './routes/components/index'
 import { Route as AboutIndexRouteImport } from './routes/about/index'
 import { Route as PostsPostIDIndexRouteImport } from './routes/posts/$postID/index'
 
@@ -42,6 +43,11 @@ const ContactUsIndexRoute = ContactUsIndexRouteImport.update({
   path: '/contact-us/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ComponentsIndexRoute = ComponentsIndexRouteImport.update({
+  id: '/components/',
+  path: '/components/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutIndexRoute = AboutIndexRouteImport.update({
   id: '/about/',
   path: '/about/',
@@ -56,6 +62,7 @@ const PostsPostIDIndexRoute = PostsPostIDIndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutIndexRoute
+  '/components': typeof ComponentsIndexRoute
   '/contact-us': typeof ContactUsIndexRoute
   '/login': typeof LoginIndexRoute
   '/posts': typeof PostsIndexRoute
@@ -65,6 +72,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutIndexRoute
+  '/components': typeof ComponentsIndexRoute
   '/contact-us': typeof ContactUsIndexRoute
   '/login': typeof LoginIndexRoute
   '/posts': typeof PostsIndexRoute
@@ -75,6 +83,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about/': typeof AboutIndexRoute
+  '/components/': typeof ComponentsIndexRoute
   '/contact-us/': typeof ContactUsIndexRoute
   '/login/': typeof LoginIndexRoute
   '/posts/': typeof PostsIndexRoute
@@ -86,6 +95,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/components'
     | '/contact-us'
     | '/login'
     | '/posts'
@@ -95,6 +105,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/components'
     | '/contact-us'
     | '/login'
     | '/posts'
@@ -104,6 +115,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about/'
+    | '/components/'
     | '/contact-us/'
     | '/login/'
     | '/posts/'
@@ -114,6 +126,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutIndexRoute: typeof AboutIndexRoute
+  ComponentsIndexRoute: typeof ComponentsIndexRoute
   ContactUsIndexRoute: typeof ContactUsIndexRoute
   LoginIndexRoute: typeof LoginIndexRoute
   PostsIndexRoute: typeof PostsIndexRoute
@@ -158,6 +171,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactUsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/components/': {
+      id: '/components/'
+      path: '/components'
+      fullPath: '/components'
+      preLoaderRoute: typeof ComponentsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about/': {
       id: '/about/'
       path: '/about'
@@ -178,6 +198,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutIndexRoute: AboutIndexRoute,
+  ComponentsIndexRoute: ComponentsIndexRoute,
   ContactUsIndexRoute: ContactUsIndexRoute,
   LoginIndexRoute: LoginIndexRoute,
   PostsIndexRoute: PostsIndexRoute,

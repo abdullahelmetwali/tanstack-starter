@@ -3,7 +3,7 @@ import { HeadContent, Outlet, createRootRoute } from '@tanstack/react-router'
 // import { TanStackDevtools } from '@tanstack/react-devtools'
 import { QueryClient, QueryClientProvider, } from '@tanstack/react-query';
 
-import NotFound from '@/components/app/not-found';
+import { NotFound } from '@/components/states/not-found';
 import { Header } from '@/components/app/header';
 import { Footer } from '@/components/app/footer';
 import { ThemeProvider } from '@/store/theme-provider';
