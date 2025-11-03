@@ -31,7 +31,7 @@ Includes essential tools and structure for scalable frontend development.
 - Fully configured ESLint, Prettier and TailwindCSS
 
 ## Folder structure
-
+```text
 tanstack-starter/
 ├─ public/
 │  ├─ fonts/               # Fonts for ENGLISH - ARABIC
@@ -51,3 +51,4 @@ tanstack-starter/
 ├─ tsconfig.json
 ├─ vite.config.ts
 └─ README.md
+```
