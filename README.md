@@ -4,6 +4,17 @@ A lightweight and modern React + TypeScript template designed for fast project s
 Includes essential tools and structure for scalable frontend development.
 
 ---
+[**Use this template →**](https://github.com/abdullahelmetwali/tanstack-starter/generate)
+
+or via command line:
+
+```bash
+npx degit abdullahelmetwali/tanstack-starter my-app
+cd my-app
+npm install
+npm run dev
+```
+---
 
 ## Features
 - **Vite** for bundling
