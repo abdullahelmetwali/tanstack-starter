@@ -19,7 +19,7 @@ export const Route = createFileRoute('/posts/$postID/')({
 
 function PostDetails() {
   const { postID } = Route.useParams();
-  const { data, isLoading, error } = useGet({
+  const { data: _data, isLoading, error } = useGet({
     url: `/posts/${postID}`,
     cacheKey: postID
   });
