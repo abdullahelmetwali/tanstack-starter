@@ -1,5 +1,5 @@
 import type { PickerTypo } from "@/types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { cn } from "@/lib/cn";
 import { FocusScope } from "@radix-ui/react-focus-scope";
@@ -53,6 +53,20 @@ export function MultiPicker({
             return updated;
         });
     };
+
+    useEffect(() => {
+        if (Array.isArray(value)) {
+            const newMap = new Map();
+            value.forEach(item => {
+                if (item && itemValue) {
+                    newMap.set(item[itemValue], item);
+                }
+            });
+            setSelected(newMap);
+        } else if (!value) {
+            setSelected(new Map());
+        }
+    }, [value, itemValue]);
 
     const [search, setSearch] = useState("");
     const filteredItems = items?.filter((item) =>

@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form'
 
 import { MultiPicker } from '@/components/core/multi-picker';
 import { Picker } from '@/components/core/picker'
+import { CalendarDate } from '@/components/core/calendar-date';
+import { FormattedDate } from '@/components/core/formatted-date';
 
 export const Route = createFileRoute('/components/')({
   component: Components,
@@ -11,7 +13,7 @@ export const Route = createFileRoute('/components/')({
 function Components() {
   const {
     watch,
-    setValue
+    setValue,
   } = useForm();
 
   const singleNoSearch = watch("item-1");
@@ -23,6 +25,9 @@ function Components() {
   const multiSearchContainer = watch("item-5");
   const multiNoSearchContainer = watch("item-6");
 
+  const date = watch("date");
+
+  const today = new Date().toISOString().split('T')[0];
   const items = [
     {
       id: 1,
@@ -131,6 +136,19 @@ function Components() {
 
             searchMode
           />
+        </div>
+        <div>
+          <CalendarDate
+            date={date}
+            setValue={setValue}
+            errors={[]}
+          />
+        </div>
+        <div>
+          <p className='text-sm'>
+            Formatted Date (by click)
+          </p>
+          <FormattedDate date={today} />
         </div>
       </div>
     </main>

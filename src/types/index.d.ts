@@ -24,3 +24,10 @@ export interface PickerTypo extends React.ComponentProps<"button"> {
     maxChoosed?: number,
     variant?: "dropdown" | "container",
 };
+export interface CalendarDateTypo {
+    date: string | Date | any,
+    errors: FieldError<FieldValues>,
+    setValue: UseFormSetValue,
+    setValueFor?: string | "date",
+    label?: string,
+};

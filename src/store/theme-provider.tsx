@@ -1,5 +1,3 @@
-/* eslint-disable no-shadow */
-/* eslint-disable @typescript-eslint/no-unnecessary-condition */
 import { createContext, useContext, useEffect, useState } from "react"
 
 type Theme = "dark" | "light" | "system"
