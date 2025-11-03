@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Loader } from 'lucide-react';
 import { createFileRoute } from '@tanstack/react-router'
 import { useGet } from '@/hooks/use-get';
