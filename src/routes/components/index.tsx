@@ -22,8 +22,8 @@ function Components() {
   const multiNoSearchDropdown = watch("item-3");
   const multiSearchDropdown = watch("item-4");
 
-  const multiSearchContainer = watch("item-5");
-  const multiNoSearchContainer = watch("item-6");
+  const multiNoSearchContainer = watch("item-5");
+  const multiSearchContainer = watch("item-6");
 
   const date = watch("date");
 
