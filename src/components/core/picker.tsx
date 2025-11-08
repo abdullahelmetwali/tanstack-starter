@@ -38,7 +38,7 @@ export function Picker({
     isLoading,
     error,
 
-    searchMode = false, // if true , it means that it will have search => Dropdownmenu
+    searchMode = false, // if true , it means that it will have search
     ...props
 }: PickerTypo) {
     const hasError = errors?.[typeof setValueFor === "string" ? setValueFor : setValueFor?.join(".")];
