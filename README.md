@@ -18,7 +18,7 @@ npm run dev
 
 ## Features
 - **Vite** for bundling
-- **React 18** with TypeScript
+- **React 19** with TypeScript
 - **React Hook Form + Zod** for type-safe form validation
 - **TanStack Query** for data fetching
 - **TanStack Router** for routing
