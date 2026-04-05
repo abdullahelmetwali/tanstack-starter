@@ -17,7 +17,6 @@ npm run dev
 ```
 ---
 
----
 [**Install Vite+ globally, if you didn't from here →**](https://voidzero.dev/posts/announcing-vite-plus-alpha)
 
 ---
