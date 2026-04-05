@@ -1,6 +1,6 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute('/about/')({
+export const Route = createFileRoute("/about/")({
   component: About,
   head: () => ({
     meta: [
@@ -8,8 +8,8 @@ export const Route = createFileRoute('/about/')({
         title: "About | Tanstack Starter"
       },
       {
-        name: 'description',
-        content: 'My App is a web application',
+        name: "description",
+        content: "My App is a web application",
       },
     ]
   })
@@ -17,7 +17,7 @@ export const Route = createFileRoute('/about/')({
 
 function About() {
   return (
-    <main className='min-h-[80dvh] grid place-items-center text-base'>
+    <main className="min-h-[80dvh] grid place-items-center text-base">
       About
     </main>
   )

@@ -1,9 +1,9 @@
-import type { PickerTypo } from "@/types";
+import type { PickerType } from "@/types";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { cn } from "@/lib/cn";
-import { FocusScope } from "@radix-ui/react-focus-scope";
-import { ChevronDown, ChevronsUpDown, Search, X } from "lucide-react";
+import { ChevronDown, ChevronsUpDown, HelpCircle, Search, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -18,6 +18,8 @@ import {
     DropdownMenuLabel
 } from "@/components/ui/dropdown-menu";
 
+import { TipOver } from "./tip-over";
+
 export function Picker({
     label,
     placeHolder,
@@ -27,21 +29,24 @@ export function Picker({
     value,
     setValue,
     setValueFor,
-    onReset,
     errors,
     errorMessage,
+    onReset,
 
     items,
     itemLabel = "name",
     itemValue = "id",
+    ableToChooseUnactive = false,
 
     isLoading,
     error,
 
-    searchMode = false, // if true , it means that it will have search
+    tooltip,
+    searchMode = false, // if true , it means that it will popover (have search)
     ...props
-}: PickerTypo) {
-    const hasError = errors?.[typeof setValueFor === "string" ? setValueFor : setValueFor?.join(".")];
+}: PickerType) {
+    const { t } = useTranslation();
+    const hasError = errors?.[setValueFor as string];
 
     const [search, setSearch] = useState("");
     const filteredItems = items?.filter((item) =>
@@ -49,13 +54,19 @@ export function Picker({
     ) || [];
 
     return (
-        <div className={cn("grid gap-1 pt-1 h-fit relative z-20 space-y-1", value ? 'pe-4' : '', className)}>
+        <div className={
+            cn("grid gap-1 h-fit relative",
+                (value || tooltip) && "pe-7",
+                label && "space-y-1",
+                className
+            )
+        }>
             <div className="inline-flex items-center gap-2">
-                <Label htmlFor={(setValueFor as string)} className="relative z-10 text-nowrap">
+                <Label htmlFor={(setValueFor as string)} className="relative z-10 text-nowrap capitalize">
                     {required && '*'} {label}
                 </Label>
                 {(hasError || errorMessage) && (
-                    <span className="text-[10px] text-destructive text-nowrap max-w-32">
+                    <span className="text-xs text-destructive text-nowrap max-w-32">
                         {hasError?.message || errorMessage}
                     </span>
                 )}
@@ -68,17 +79,17 @@ export function Picker({
                         type="button"
                         variant="outline"
                         className={cn(
-                            "flex justify-between w-full font-normal relative z-50 border bg-background! min-w-64! h-8",
+                            "flex justify-between w-full font-normal relative! z-30! border ring-ring bg-background! min-w-44",
                             value ? "opacity-100" : "opacity-60"
                         )}
                         aria-invalid={!!hasError}
                         {...props as any}
                     >
-                        <span className="truncate max-w-60">
+                        <span className="truncate max-w-[calc(100%-50px)] text-base lg:text-sm">
                             {/* truncate max-w-40 md:max-w-60 lg:max-w-28 2xl:max-w-40 */}
                             {
                                 value ?
-                                    items?.find(item =>
+                                    items?.find((item: any) =>
                                         String(item[itemValue]) === String(value)
                                     )?.[itemLabel]
                                     :
@@ -93,33 +104,31 @@ export function Picker({
                         }
                     </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-[var(--radix-dropdown-menu-trigger-width)] px-2 space-y-0 bg-card">
+                <DropdownMenuContent className="w-[calc(var(--radix-dropdown-menu-trigger-width)-20px)] md:w-[var(--radix-dropdown-menu-trigger-width)] p-1 space-y-0 bg-card">
                     {
                         searchMode ?
-                            <div className="relative ps-4 h-7">
-                                <FocusScope>
-                                    <Input
-                                        aria-hidden={false}
-                                        type="text"
-                                        placeholder={placeHolder}
-                                        value={search}
-                                        onKeyDown={(e) => e.stopPropagation()}
-                                        onClick={(e) => e.stopPropagation()}
-                                        onChange={(e) => setSearch(e.target.value)}
-                                        className="outline-none! border-none! ring-0! shadow-none! text-sm bg-transparent!"
-                                    />
-                                    <Search className="absolute top-2.5 start-1 size-4!" />
-                                </FocusScope>
+                            <div className="relative ps-4 w-full">
+                                <Input
+                                    aria-hidden={false}
+                                    type="text"
+                                    placeholder={placeHolder}
+                                    value={search}
+                                    onKeyDown={(e) => e.stopPropagation()}
+                                    onClick={(e) => e.stopPropagation()}
+                                    onChange={(e) => setSearch(e.target.value)}
+                                    className="outline-none! border-none! ring-0! shadow-none! text-sm bg-transparent!"
+                                />
+                                <Search className="absolute top-2.75 start-1.5 size-3.5!" />
                             </div>
                             :
-                            <DropdownMenuLabel className="text-muted-foreground! text-xs!">
-                                {label}
+                            <DropdownMenuLabel className="py-0.5">
+                                {label || placeHolder}
                             </DropdownMenuLabel>
                     }
 
                     <DropdownMenuSeparator className="bg-secondary" />
 
-                    <div className="max-h-60 overflow-y-auto w-full">
+                    <div className="max-h-60 space-y-0.5! overflow-y-auto w-full">
                         {isLoading ? (
                             <p className="text-center text-sm p-4 animate-pulse">Loading...</p>
                         ) : error ? (
@@ -127,20 +136,26 @@ export function Picker({
                         ) : filteredItems?.length === 0 ? (
                             <p className="text-center text-sm text-muted-foreground p-4">No results</p>
                         ) : (
-                            filteredItems.map((item, index) => {
+                            filteredItems?.map((item: any, index: number) => {
                                 const thisItemLabel = item[itemLabel];
                                 const thisItemValue = item[itemValue];
-                                const isDisabled = Number(item?.status) === 0;
+                                const isDisabled = !ableToChooseUnactive && Number(item?.status) === 0;
+                                const isChecked = String(value) === String(thisItemValue);
                                 return (
                                     <DropdownMenuCheckboxItem
                                         key={index}
                                         disabled={isDisabled}
-                                        checked={String(value) === String(thisItemValue)}
+                                        checked={isChecked}
                                         onCheckedChange={() => setValue(setValueFor, String(thisItemValue))}
-                                        title={isDisabled ? 'Disabled' : thisItemLabel}
-                                        className="hover:bg-secondary cursor-pointer p-2 truncate max-w-[calc(var(--radix-dropdown-menu-trigger-width)-5px)] [&_span]:end-2! [&_span]:start-auto justify-between h-7"
+                                        title={isDisabled ? t('custom.disabled') : thisItemLabel}
+                                        className={cn("hover:bg-secondary cursor-pointer ps-2! [&_span]:end-2! [&_span]:start-auto justify-between",
+                                            isChecked && "bg-muted",
+                                            isChecked && isDisabled && "[&_span]:end-6!"
+                                        )}
                                     >
-                                        {thisItemLabel}
+                                        <p className="max-w-[calc(100%-35px)] truncate">
+                                            {thisItemLabel}
+                                        </p>
                                         {
                                             isDisabled &&
                                             <span className="size-2 rounded-full bg-destructive" />
@@ -152,22 +167,43 @@ export function Picker({
                     </div>
                 </DropdownMenuContent>
             </DropdownMenu>
-            <Button
-                type="button"
-                variant={"destructive"}
-                className={cn(
-                    "absolute z-10 ps-8! h-7 [&_svg]:size-auto transition-all w-4!",
-                    value ? '-end-3 opacity-100 visible' : '-end-6 opacity-0 invisible pointer-events-none',
-                    label ? "top-7" : "top-2.5"
-                )}
-                onClick={() => {
-                    setValue(setValueFor, "");
-                    onReset?.()
-                }}
-                {...props as any}
-            >
-                <X size={13} className="me-1" />
-            </Button>
+
+            {
+                (tooltip && !value)
+                    ?
+                    <TipOver
+                        className={cn("absolute! end-0 z-0! [&_svg]:size-auto transition-all",
+                            label ? "top-5.5" : "top-1"
+                        )}
+                        content={tooltip}
+                        trigger={
+                            <Button
+                                className="ps-12! h-9 pe-2!"
+                                variant={"outline"}
+                                type="button"
+                            >
+                                <HelpCircle />
+                            </Button>
+                        }
+                    />
+                    :
+                    <Button
+                        type="button"
+                        variant={"destructive"}
+                        className={cn(
+                            "absolute! end-0 z-0! ps-12! pe-2! h-9 [&_svg]:size-auto transition-all hover:bg-destructive/80",
+                            value ? 'opacity-100 visible' : '-end-6 opacity-0 invisible pointer-events-none',
+                            label ? "top-5.5" : "top-1.25"
+                        )}
+                        onClick={() => {
+                            setValue(setValueFor, "");
+                            onReset?.()
+                        }}
+                        {...props as any}
+                    >
+                        <X size={13} />
+                    </Button>
+            }
         </div>
     );
 };

@@ -1,4 +1,4 @@
-import type { PickerTypo } from "@/types";
+import type { PickerType } from "@/types";
 import { useEffect, useState } from "react";
 
 import { cn } from "@/lib/cn";
@@ -39,8 +39,8 @@ export function MultiPicker({
     variant = "container",
     searchMode = false,
     ...props
-}: PickerTypo) {
-    const hasError = errors?.[typeof setValueFor === "string" ? setValueFor : setValueFor?.join(".")];
+}: PickerType) {
+    const hasError = errors?.[setValueFor];
 
     const [selected, setSelected] = useState(new Map());
     const addOrRemove = (id: string | number, value: Record<string, string>) => {
@@ -112,7 +112,7 @@ export function MultiPicker({
                                     No results
                                 </p>
                             ) : (
-                                filteredItems.map((item, index) => {
+                                filteredItems.map((item: any, index: number) => {
                                     const thisItemLabel = item[itemLabel];
                                     const thisItemValue = item[itemValue];
                                     const disabled = !selected.has(thisItemValue) && (Number(item?.status) === 0 || selected.size === maxChoosed);
@@ -215,7 +215,7 @@ export function MultiPicker({
                                 ) : filteredItems?.length === 0 ? (
                                     <p className="text-center text-sm text-muted-foreground p-4">No results</p>
                                 ) : (
-                                    filteredItems.map((item, index) => {
+                                    filteredItems.map((item: any, index: number) => {
                                         const thisItemLabel = item[itemLabel];
                                         const thisItemValue = item[itemValue];
                                         const isDisabled = !selected.has(thisItemValue) &&

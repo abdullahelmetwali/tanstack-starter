@@ -12,12 +12,18 @@ or via command line:
 npx degit abdullahelmetwali/tanstack-starter my-app
 cd my-app
 npm install
+vp install
 npm run dev
 ```
 ---
 
+---
+[**Install Vite+ globally, if you didn't from here →**](https://voidzero.dev/posts/announcing-vite-plus-alpha)
+
+---
+
 ## Features
-- **Vite** for bundling
+- **Vite + Rolldown** for faster bundling and building performance
 - **React 19** with TypeScript
 - **React Hook Form + Zod** for type-safe form validation
 - **TanStack Query** for data fetching

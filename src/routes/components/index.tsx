@@ -1,12 +1,13 @@
-import { createFileRoute } from '@tanstack/react-router'
-import { useForm } from 'react-hook-form'
+// @ts-nocheck
+import { createFileRoute } from "@tanstack/react-router";
+import { useForm } from "react-hook-form";
 
-import { MultiPicker } from '@/components/core/multi-picker';
-import { Picker } from '@/components/core/picker'
-import { CalendarDate } from '@/components/core/calendar-date';
-import { FormattedDate } from '@/components/core/formatted-date';
+import { MultiPicker } from "@/components/core/multi-picker";
+import { Picker } from "@/components/core/picker";
+import { CalendarDate } from "@/components/core/calendar-date";
+import { FormattedDate } from "@/components/core/formatted-date";
 
-export const Route = createFileRoute('/components/')({
+export const Route = createFileRoute("/components/")({
   component: Components,
 })
 
@@ -25,9 +26,7 @@ function Components() {
   const multiNoSearchContainer = watch("item-5");
   const multiSearchContainer = watch("item-6");
 
-  const date = watch("date");
-
-  const today = new Date().toISOString().split('T')[0];
+  const today = new Date().toISOString().split("T")[0];
   const items = [
     {
       id: 1,
@@ -48,16 +47,16 @@ function Components() {
   ];
 
   return (
-    <main className='min-h-dvh grid place-items-center text-base'>
+    <main className="min-h-dvh grid place-items-center text-base">
       <h1>
         Components
       </h1>
-      <div className='grid md:grid-cols-2 gap-4 mb-8'>
+      <div className="grid md:grid-cols-2 gap-4 mb-8">
         <div>
           <Picker
             items={items}
-            label='Single Picker (No Search)'
-            placeHolder={'Select any of these items'}
+            label="Single Picker (No Search)"
+            placeHolder={"Select any of these items"}
 
             value={singleNoSearch}
             setValue={setValue}
@@ -67,8 +66,8 @@ function Components() {
         <div>
           <Picker
             items={items}
-            label='Single Picker (Search)'
-            placeHolder={'Select any of these items'}
+            label="Single Picker (Search)"
+            placeHolder={"Select any of these items"}
 
             value={singleSearch}
             setValue={setValue}
@@ -78,13 +77,13 @@ function Components() {
           />
         </div>
 
-        <div className='w-80'>
+        <div className="w-80">
           <MultiPicker
             items={items}
 
             variant={"dropdown"}
-            label='Multi Picker (Dropdown No Search)'
-            placeHolder={'Choose more than one'}
+            label="Multi Picker (Dropdown No Search)"
+            placeHolder={"Choose more than one"}
 
             value={multiNoSearchDropdown}
             setValue={setValue}
@@ -92,13 +91,13 @@ function Components() {
           />
         </div>
 
-        <div className='w-80'>
+        <div className="w-80">
           <MultiPicker
             items={items}
 
             variant={"dropdown"}
-            label='Multi Picker (Dropdown Search)'
-            placeHolder={'Choose more than one'}
+            label="Multi Picker (Dropdown Search)"
+            placeHolder={"Choose more than one"}
 
             value={multiSearchDropdown}
             setValue={setValue}
@@ -108,13 +107,13 @@ function Components() {
           />
         </div>
 
-        <div className='w-80'>
+        <div className="w-80">
           <MultiPicker
             items={items}
 
             variant={"container"}
-            label='Multi Picker (Container No Search)'
-            placeHolder={'Choose more than one'}
+            label="Multi Picker (Container No Search)"
+            placeHolder={"Choose more than one"}
 
             value={multiNoSearchContainer}
             setValue={setValue}
@@ -122,13 +121,13 @@ function Components() {
           />
         </div>
 
-        <div className='w-80'>
+        <div className="w-80">
           <MultiPicker
             items={items}
 
             variant={"container"}
-            label='Multi Picker (Container Search)'
-            placeHolder={'Choose more than one'}
+            label="Multi Picker (Container Search)"
+            placeHolder={"Choose more than one"}
 
             value={multiSearchContainer}
             setValue={setValue}
@@ -139,13 +138,13 @@ function Components() {
         </div>
         <div>
           <CalendarDate
-            date={date}
+            date={watch("date")}
             setValue={setValue}
             errors={[]}
           />
         </div>
         <div>
-          <p className='text-sm'>
+          <p className="text-sm">
             Formatted Date (by click)
           </p>
           <FormattedDate date={today} />

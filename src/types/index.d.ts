@@ -1,21 +1,23 @@
 // write your app types here
-export interface PickerTypo extends React.ComponentProps<"button"> {
+export interface PickerType extends React.ComponentProps<"button"> {
     label?: string,
     placeHolder: string,
     className?: string,
     required?: boolean,
 
-    value: string | Array<any>,
+    value: string | number,
+    setValueFor: string,
     setValue?: UseFormSetValue | Dispatch<SetStateAction<any>>,
-    setValueFor?: string | Array<string>,
     onReset?: () => void,
 
+    register?: UseFormRegister | null,
     errors?: FieldErrors<FieldValues>,
     errorMessage?: string,
 
-    items: Array<any>,
+    items: any[],
     itemLabel?: string | "name",
     itemValue?: string | "id",
+    ableToChooseUnactive?: boolean,
 
     isLoading?: boolean | undefined | null,
     error?: Error | undefined | null,
@@ -23,7 +25,9 @@ export interface PickerTypo extends React.ComponentProps<"button"> {
 
     maxChoosed?: number,
     variant?: "dropdown" | "container",
+    tooltip?: string
 };
+
 export interface CalendarDateTypo {
     date: string | Date | any,
     errors: FieldError<FieldValues>,

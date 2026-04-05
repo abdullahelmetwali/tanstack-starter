@@ -1,7 +1,7 @@
 import { AirplayIcon, CloudSun, Monitor, Moon, Sun } from "lucide-react";
 
 import { cn } from "@/lib/cn";
-import { useTheme } from "@/store/theme-provider";
+import { useTheme } from "@/context/theme-provider";
 
 import { Button } from "@/components/ui/button";
 import {
